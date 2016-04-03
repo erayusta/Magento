@@ -1,5 +1,6 @@
 <?php
 /*
+Excel e export edilmiş configurable ürünlerden simple ürünler oluşturup beden özelliğine göre atayan kod parçası
 Excel Formatı:
 Conf ID | Beden 36 | Beden 38 ..... | Beden 54 | Renk Conf 1 | Renk Conf 2 | Renk Conf 3
 */
