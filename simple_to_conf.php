@@ -1,4 +1,7 @@
 <?php
+/*
+Magentoda yer alan simple ürünleri okuyup yerine configurable ürün açan kod parçası
+*/
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
