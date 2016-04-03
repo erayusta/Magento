@@ -70,20 +70,20 @@ $csv = array_map('str_getcsv', file('urunler.csv'));
 
 // Renk Seçeneği
 $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', 161);
-foreach ( $attribute->getSource()->getAllOptions(true, true) as $option){
+foreach ($attribute->getSource()->getAllOptions(true, true) as $option) {
 	$renkler[$option['value']] = $option['label'];
 }
 
 // Beden Seçeneği
 $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', 162);
-foreach ( $attribute->getSource()->getAllOptions(true, true) as $option){
+foreach ($attribute->getSource()->getAllOptions(true, true) as $option) {
 	$bedenler[$option['value']] = $option['label'];
 }
 
 foreach ($csv as $key => $uruns) {
 	if ($key > 0) {
 		if ($uruns[15] == 1) {
-    	$urunler[$uruns[0]]['sku'] = $uruns[0];
+			$urunler[$uruns[0]]['sku'] = $uruns[0];
 			$urunler[$uruns[0]]['name'] = $uruns[1];
 			$urunler[$uruns[0]]['link'] = $uruns[2];
 			$urunler[$uruns[0]]['renk'] = $uruns[12];
@@ -102,36 +102,33 @@ foreach ($csv as $key => $uruns) {
 }
 
 foreach ($urunler as $urun) {
-  foreach($bedenler as $key => $beden){
-		if($beden == $urun['beden']){
+	foreach ($bedenler as $key => $beden) {
+		if ($beden == $urun['beden']) {
 			$urun['beden_attr'] = $key;
-		}
-		elseif($urun['beden'] == "2XL"){
+		} elseif ($urun['beden'] == "2XL") {
 			$urun['beden_attr'] = 49;
 		}
 	}
 
-	if($urun['renk'] == "" && stripos($urun['name'],'Kahve')){
+	if ($urun['renk'] == "" && stripos($urun['name'], 'Kahve')) {
 		$urun['renk'] = "Kahve";
-	}
-	elseif($urun['renk'] == "" && stripos($urun['name'],'Antrasit')){
+	} elseif ($urun['renk'] == "" && stripos($urun['name'], 'Antrasit')) {
 		$urun['renk'] = "Antrasit";
-	}
-	elseif($urun['renk'] == "" && stripos($urun['name'],'Siyah')){
+	} elseif ($urun['renk'] == "" && stripos($urun['name'], 'Siyah')) {
 		$urun['renk'] = "Siyah";
 	}
 
-	foreach($renkler as $keyr => $renk){
-		if($renk == $urun['renk']){
+	foreach ($renkler as $keyr => $renk) {
+		if ($renk == $urun['renk']) {
 			$urun['renk_attr'] = $keyr;
 		}
 	}
 
-	if(!isset($urun['beden_attr'])){
+	if (!isset($urun['beden_attr'])) {
 		$urun['beden_attr'] = 0;
 	}
 
-	if(!isset($urun['renk_attr'])){
+	if (!isset($urun['renk_attr'])) {
 		$urun['renk_attr'] = 0;
 	}
 
