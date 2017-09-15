@@ -1,0 +1,14 @@
+<?php
+
+require_once( '../app/Mage.php' );
+Mage::app('admin')->setUseSessionInUrl(false);
+
+$products = Mage::getModel('catalog/product')->getCollection();
+foreach ($products as $product) {
+	try {
+		$product->delete();
+	} catch(Exception $e) {
+		echo "Product #".$product->getId()." could not be remvoved: ".$e->getMessage();
+	}
+}
+
